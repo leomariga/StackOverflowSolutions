@@ -1,9 +1,10 @@
 import os
-
-stuDir_filepath = 'StudentDetails'
+stuDir = 'StudentDetails'
+stuDir_filepath = os.path.join(os.path.dirname(__file__), stuDir)
 os.mkdir(stuDir_filepath)
 
-facDir_filepath = 'FacultyDetails'
+facDir = 'FacultyDetails'
+facDir_filepath = os.path.join(os.path.dirname(__file__), facDir)
 os.mkdir(facDir_filepath)
 
 name_of_file = "name_file"
