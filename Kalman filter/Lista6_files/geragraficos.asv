@@ -1,0 +1,61 @@
+t = t_x.Time
+
+z = t_z.Data;
+x_ref = t_href.Data;
+
+x = t_x.Data(:,1);
+xm = t_xm.Data(:,1);
+vel = t_x.Data(:,2);
+velm = t_xm.Data(:,2);
+x_real = t_x_real.Data;
+vel_real = t_vel_real.Data;
+
+sigma_x = sqrt(t_P.Data(1,1,:));
+sigma_vel = sqrt(t_P.Data(2,2,:));
+sigma_xm = sqrt(t_Pm.Data(1,1,:));
+sigma_velm = sqrt(t_Pm.Data(2,2,:));
+
+%% Junta arrays xm e x, P e Pm etc...
+t_t = [t(:) t(:)]';
+t_t = t_t(:)
+
+erro_x_xm = [x_real(:)-x(:) x_real(:)-xm(:)]';
+erro_x_xm = erro_x_xm(:)
+
+erro_vel_velm = [vel_real(:)-vel(:) vel_real(:)-velm(:)]';
+erro_vel_velm = erro_vel_velm(:)
+
+x_xm = [x(:) xm(:)]';
+x_xm = x_xm(:)
+
+sigma_x_xm = [sigma_x(:) sigma_xm(:)]';
+sigma_x_xm = sigma_x_xm(:)
+
+sigma_vel_velm = [sigma_vel(:) sigma_velm(:)]';
+sigma_vel_velm = sigma_vel_velm(:)
+
+subplot(2,2,1)
+plot(t_t,erro_x_xm)
+plot(t_t,-3*sigma_x_xm)
+plot(t_t,3*sigma_x_xm)
+title('Erro de posição (m)')
+
+subplot(2,2,2)
+plot(t,x)
+plot(t,xm)
+plot(t,x_real)
+plot(t,href)
+scatter(t,z)
+title('Posição')
+
+subplot(2,2,3)
+plot(t_t,erro_vel_velm)
+plot(t_t,-3*sigma_vel_velm)
+plot(t_t,3*sigma_vel_velm)
+title('Subplot 3: sin(4x)')
+
+subplot(2,2,4)
+plot(t,vel)
+plot(t,velm)
+plot(t,vel_real)
+title('Subplot 4: sin(8x)')
